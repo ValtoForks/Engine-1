@@ -23,6 +23,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/lib)
 
+SET(CMAKE_C_FLAGS_DEBUG "/MTd /Z7 /Od")
 add_subdirectory(dependencies)
 
 set ( SDL2_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/SDL/include )
@@ -42,6 +43,9 @@ set ( WHEREAMI_LIBRARY whereami )
 set ( IMGUI_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/ )
 set ( IMGUI_LIBRARY imgui )
 
+
+set ( BULLET_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/bullet3/src/ )
+#set ( BULLET_LIBRARY bullet3 )
 
 IF (EMSCRIPTEN)
   add_definitions( -DGLES2=1 )
@@ -88,6 +92,7 @@ ELSE ()
     ${GLEW_LIBRARIES}
     ${WHEREAMI_LIBRARY}
     ${IMGUI_LIBRARY}
+    BulletDynamics BulletCollision LinearMath
   )
 
   set(ENGINE_INCLUDES
@@ -97,6 +102,7 @@ ELSE ()
     ${GLEW_INCLUDE_DIRS}
     ${WHEREAMI_INCLUDE_DIRS}
     ${IMGUI_INCLUDE_DIRS}
+    ${BULLET_INCLUDE_DIRS}
     ${CMAKE_CURRENT_SOURCE_DIR}/src/engine/
   )
 ENDIF ()
