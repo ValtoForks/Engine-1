@@ -52,7 +52,7 @@ void Entity::addChild(std::shared_ptr<Entity> child)
   }
 }
 
-void Entity::updateInputAll(Input *input, int delta)
+void Entity::updateInputAll(Input *input, std::chrono::microseconds delta)
 {
   if (parentEntity == nullptr) {
     worldMatrix = transform.getTransformMatrix();
@@ -71,7 +71,7 @@ void Entity::updateInputAll(Input *input, int delta)
   }
 }
 
-void Entity::updateAll(int delta)
+void Entity::updateAll(std::chrono::microseconds delta)
 {
   for (auto component : components) {
     component->update(delta);
