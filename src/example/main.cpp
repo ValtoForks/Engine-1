@@ -41,7 +41,7 @@ void CoolGame::updateInput(Input *input, std::chrono::microseconds delta)
   if (input->isPressed(SDLK_SPACE) && !pressed) {
     pressed = true;
     MeshLoader cube("cube.obj");
-    cube.getEntity()->getTransform().setPosition(primary_camera->getParent()->getPosition().xyz);
+    cube.getEntity()->getTransform().setPosition(primary_camera->getParent()->getPosition().xyz());
     cube.getEntity()->addComponent<BoxCollider>(glm::vec3(0.5, 0.5, 0.5), 50);
     cube.getEntity()->addComponent<Sphere>(1);
     addToScene(cube.getEntity());

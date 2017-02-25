@@ -2,7 +2,7 @@
 //  Author: Shervin Aflatooni
 //
 
-#ifndef ANDROID
+#if !defined(ANDROID) && !defined(EMSCRIPTEN)
   #include <GL/glew.h>
 #endif
 
@@ -12,7 +12,7 @@
 
 GLEWManager::GLEWManager(void)
 {
-#ifndef ANDROID
+#if !defined(ANDROID) && !defined(EMSCRIPTEN)
   glewExperimental = GL_TRUE;
   GLenum err = glewInit();
 
