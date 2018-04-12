@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include <chrono>
+
 #include "GLManager.h"
 #include "Window.h"
 #include "GLEWManager.h"
@@ -12,7 +14,6 @@
 #include "Game.h"
 
 #include "Input.h"
-#include "components/Sphere.h"
 
 class Engine
 {
@@ -27,9 +28,11 @@ public:
   void tick(void);
   void start(void);
 
-  Window         *getWindow(void) const;
-  GLManager      *getGLManager(void) const;
+  Window *getWindow(void) const;
+  GLManager *getGLManager(void) const;
   PhysicsManager *getPhysicsManager(void) const;
+
+  std::chrono::microseconds getDeltaTime(void) const;
 
 private:
   std::unique_ptr<Window> m_window;
@@ -37,9 +40,12 @@ private:
   std::unique_ptr<GLManager> m_glManager;
   std::unique_ptr<PhysicsManager> m_physicsManager;
 
+  std::chrono::high_resolution_clock::time_point m_time, m_lastTime;
+  std::chrono::microseconds m_deltaTime;
+
+  //std::chrono::high_resolution_clock::time_point m_physicsTimeSimulated;
+
   Game *game;
 
-  Input input;
-
-  bool quit;
+  bool quit, m_fireRay;
 };

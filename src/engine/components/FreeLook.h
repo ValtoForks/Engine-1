@@ -9,13 +9,16 @@
 class FreeLook : public Component
 {
 public:
-  FreeLook(float speed = 0.001f);
+  FreeLook(float speed = 1.f);
   ~FreeLook(void);
 
-  virtual void updateInput(Input *input, int delta);
+  virtual void update(Input *input, std::chrono::microseconds delta);
+  virtual void registerWithEngine(Engine *engine);
+  virtual void deregisterFromEngine(Engine *engine);
 
   inline virtual const char *getType(void) { return "FREE_LOOK"; }
 
 private:
   float m_speed;
+  bool m_look;
 };
